@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="m-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
+    <div class="m-6 grid grid-cols-1 2col:grid-cols-2 3col:grid-cols-3 gap-4">
       <div v-for="product in products" :key="product.id" v-bind:product="product" class="border rounded-lg bg-gray-100 hover:shadow-lg">
         <productWidget :product="product"></productWidget>
       </div>
@@ -27,7 +27,12 @@ export default {
     const products = await $shopify.product.fetchAll();
     return { products };
   },
-  /*methods: {
+  /*async asyncData({ $shopify, params }) {
+    const collectionId = 'Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzI2MDcwNDA0MzA2MA==';
+    const products = await $shopify.collection.fetchWithProducts(collectionId);
+    return { products };
+  }
+  methods: {
     selectImage() {
     let primaryImage = products;
     console.log(primaryImage.images[0].src);
